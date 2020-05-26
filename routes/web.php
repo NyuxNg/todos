@@ -1,6 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
+// Route::middleware('auth')->group(function(){
+    Route::resource('/todos', 'TodoController');
+    Route::put('/todos/complete/{todo}', 'TodoController@complete')->name('todos.complete');
+    Route::delete('/todos/uncomplete/{todo}', 'TodoController@uncomplete')->name('todos.uncomplete');
+// });
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +24,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/user', 'UserController@index');
+
+Route::post('/upload', 'UserController@uploadAvatar');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
